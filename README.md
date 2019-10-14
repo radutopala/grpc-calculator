@@ -1,6 +1,6 @@
 # Calculator
 
-[![Github Actions](https://github.com/radutopala/calculator/workflows/tests/badge.svg)](https://github.com/radutopala/calculator/actions)
+[![Github Actions](https://github.com/radutopala/grpc-calculator/workflows/tests/badge.svg)](https://github.com/radutopala/grpc-calculator/actions)
 
 A GRPC protobuf k8s calculator made in Go.
 

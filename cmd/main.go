@@ -16,8 +16,8 @@ import (
 	"path"
 	"runtime"
 
-	calculator "github.com/radutopala/calculator/api"
-	"github.com/radutopala/calculator/service"
+	calculator "github.com/radutopala/grpc-calculator/api"
+	"github.com/radutopala/grpc-calculator/service"
 	jaeger_metrics "github.com/uber/jaeger-lib/metrics"
 
 	grpc_runtime "github.com/grpc-ecosystem/grpc-gateway/runtime"

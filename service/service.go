@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/Knetic/govaluate"
-	calculator "github.com/radutopala/calculator/api"
+	calculator "github.com/radutopala/grpc-calculator/api"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

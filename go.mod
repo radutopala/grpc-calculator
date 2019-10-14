@@ -1,4 +1,4 @@
-module github.com/radutopala/calculator
+module github.com/radutopala/grpc-calculator
 
 go 1.13
 

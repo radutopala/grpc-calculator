@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	calculator "github.com/radutopala/calculator/api"
+	calculator "github.com/radutopala/grpc-calculator/api"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
