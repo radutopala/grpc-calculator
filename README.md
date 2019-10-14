@@ -1,8 +1,8 @@
-# Calculator
+# gRPC Calculator
 
 [![Github Actions](https://github.com/radutopala/grpc-calculator/workflows/tests/badge.svg)](https://github.com/radutopala/grpc-calculator/actions)
 
-A GRPC protobuf k8s calculator made in Go.
+A gRPC protobuf k8s calculator made in Go.
 
 ## Usage
 
@@ -68,4 +68,14 @@ Rpc succeeded with OK status
 
 ```
 go run cmd/client/main.go 3+5+(10*2)
+```
+
+## Infra
+
+### Docker
+Server docker image is auto-published via Github Actions at [radutopala/grpc-calculator](https://hub.docker.com/r/radutopala/grpc-calculator)
+
+#### Run locally
+```
+docker run -p8080:8080 -p2338:2338 radutopala/grpc-calculator:v0.0.1
 ```
