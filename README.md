@@ -40,7 +40,7 @@ This will provide 3 endpoints:
  * HTTP at `http://localhost:8080`
  * Prometheus at `http://localhost:8081`
 
-## Calls
+## Client
 
 Have the server run and then execute one of the following.
 
