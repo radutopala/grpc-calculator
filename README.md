@@ -39,9 +39,23 @@ This will provide 3 endpoints:
  * HTTP at `http://localhost:8080`
  * Prometheus at `http://localhost:8081`
 
-## Rest API
+## Calls
+
+### HTTP
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"expression":"3+5+(10*2)"}' "http://localhost:8080/compute"
 {"result": "28"}
+```
+
+### GRPC
+
+To install `grpc_cli` on a Mac, run `brew install grpc`.
+
+```
+grpc_cli call localhost:2338 Compute 'expression: "3+5+(10*2)"'
+connecting to localhost:2338
+result: "28"
+
+Rpc succeeded with OK status
 ```

@@ -9,6 +9,7 @@ import (
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
+	"google.golang.org/grpc/reflection"
 	"net"
 	"net/http"
 	"os"
@@ -107,6 +108,7 @@ func start(c *cli.Context) {
 
 	// Register Calculator service, prometheus and HTTP service handler
 	calculator.RegisterServiceServer(server, &service.Service{})
+	reflection.Register(server)
 	grpc_prometheus.Register(server)
 
 	go func() {
