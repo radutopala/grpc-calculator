@@ -7,3 +7,8 @@ generate:
 test:
 	@echo "Running tests"
 	go test -v ./...
+
+docker-build:
+	@echo "Build docker server image"
+	docker build -f ./infra/docker/Dockerfile -t radutopala/grpc-calculator:v0.0.1 .
+	docker push radutopala/grpc-calculator:v0.0.1
