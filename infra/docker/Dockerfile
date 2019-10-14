@@ -4,7 +4,7 @@ WORKDIR /go/src/grpc-calculator
 RUN go mod download
 RUN go build -o server cmd/server/main.go
 
-FROM golang:1.13
+FROM blitznote/debase:18.04
 RUN mkdir -p /go/src/grpc-calculator
 COPY --from=builder /go/src/grpc-calculator/server /go/src/grpc-calculator/server
 WORKDIR /go/src/grpc-calculator
