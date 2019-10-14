@@ -38,3 +38,10 @@ This will provide 3 endpoints:
  * GRPC at `localhost:2338`
  * HTTP at `http://localhost:8080`
  * Prometheus at `http://localhost:8081`
+
+## Rest API
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"expression":"3+5+(10*2)"}' "http://localhost:8080/compute"
+{"result": "28"}
+```
