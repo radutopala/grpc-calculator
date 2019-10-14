@@ -6,8 +6,9 @@ A GRPC protobuf k8s calculator made in Go.
 
 ## Usage
 
+### Server
 ```
-go run cmd/main.go
+go run cmd/server/main.go
 ```
 ```
 NAME:
@@ -41,6 +42,8 @@ This will provide 3 endpoints:
 
 ## Calls
 
+Have the server run and then execute one of the following.
+
 ### HTTP
 
 ```
@@ -50,6 +53,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"expression":"3+5+(10*2)"}
 
 ### GRPC
 
+#### via `grpc_cli`
 To install `grpc_cli` on a Mac, run `brew install grpc`.
 
 ```
@@ -58,4 +62,10 @@ connecting to localhost:2338
 result: "28"
 
 Rpc succeeded with OK status
+```
+
+#### via local client
+
+```
+go run cmd/client/main.go 3+5+(10*2)
 ```

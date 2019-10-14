@@ -44,7 +44,7 @@ var panicHandler = grpc_recovery.RecoveryHandlerFunc(func(p interface{}) error {
 func main() {
 	app := cli.NewApp()
 	app.Name = path.Base(os.Args[0])
-	app.Usage = "Calculator"
+	app.Usage = "Calculator Server"
 	app.Version = "0.0.1"
 	app.Flags = flags
 	app.Action = start
