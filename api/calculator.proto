@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package calculator;
 
+import "google/api/annotations.proto";
+
 message Request {
     string expression = 1;
 }
@@ -12,5 +14,9 @@ message Response {
 
 service Service {
     rpc Compute (Request) returns (Response) {
+        option (google.api.http) ={
+			post: "/compute"
+			body: "*"
+		};
     }
 }
