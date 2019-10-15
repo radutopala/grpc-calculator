@@ -12,7 +12,7 @@ go run cmd/server/main.go
 ```
 ```
 NAME:
-   main - Calculator
+   main - Calculator Server
 
 USAGE:
    main [global options] command [command options] [arguments...]
@@ -36,7 +36,7 @@ GLOBAL OPTIONS:
 ```
 
 This will provide 3 endpoints:
- * GRPC at `localhost:2338`
+ * gRPC at `localhost:2338`
  * HTTP at `http://localhost:8080`
  * Prometheus at `http://localhost:8081`
 
@@ -51,7 +51,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"expression":"3+5+(10*2)"}
 {"result": "28"}
 ```
 
-### GRPC
+### gRPC
 
 #### via `grpc_cli`
 To install `grpc_cli` on a Mac, run `brew install grpc`.
