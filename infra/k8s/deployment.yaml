@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-deployment
+  labels:
+    app: calculator
+spec:
+  selector:
+    matchLabels:
+      app: calculator
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: calculator
+    spec:
+      containers:
+        - name: calculator
+          image: radutopala/grpc-calculator:v0.0.1
+          ports:
+            - name: c-grpc-service
+              containerPort: 2338
+            - name: c-http-service
+              containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calculator-service
+spec:
+  selector:
+    app: calculator
+  ports:
+    - name: c-grpc-service
+      port: 2338
+      targetPort: c-grpc-service
+    - name: c-http-service
+      port: 8080
+      targetPort: c-http-service
+      nodePort: 30080
+  type: NodePort

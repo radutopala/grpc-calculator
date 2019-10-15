@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#single-service-ingress
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: calculator-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: calculator-service
+              servicePort: 8080

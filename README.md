@@ -79,3 +79,22 @@ Server docker image is auto-published via Github Actions at [radutopala/grpc-cal
 ```
 docker run -p8080:8080 -p2338:2338 radutopala/grpc-calculator:v0.0.1
 ```
+
+### Kubernetes
+
+#### Minikube on Mac
+
+Should have installed: minikube, kubectl
+
+> Run `kubectl version` and make sure you have the same major and minor versions for both client and server, else you'll get errors. 
+
+```
+minikube start
+kubectl apply -f infra/k8s/nginx-ingress-mandatory.yaml
+minikube addons enable ingress
+kubectl apply -f infra/k8s/ingress.yaml
+kubectl apply -f infra/k8s/deployment.yaml
+curl -kL -X POST -H "Content-Type: application/json" -d '{"expression":"3+5+(10*2)"}' http://192.168.99.100/compute
+{"result":"28"}
+```
+where `192.168.99.100` is the external IP of Minikube.
