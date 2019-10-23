@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestCompute(t *testing.T) {
+func TestService_Compute(t *testing.T) {
 	cases := []struct {
 		input    string
 		expected string
@@ -28,6 +28,10 @@ func TestCompute(t *testing.T) {
 			"5.55*(10-1)",
 			"49.949999999999996",
 		},
+		{
+			"100*1000",
+			"100000",
+		},
 	}
 
 	for _, c := range cases {
@@ -44,5 +48,17 @@ func TestCompute(t *testing.T) {
 			assert.NotNil(t, response)
 			assert.Equal(t, response.Result, c.expected)
 		})
+	}
+}
+
+func BenchmarkService_Compute(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		s := &Service{}
+		_, _ = s.Compute(
+			context.Background(),
+			&calculator.Request{
+				Expression: "100*1000",
+			},
+		)
 	}
 }
