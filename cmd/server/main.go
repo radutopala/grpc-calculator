@@ -78,15 +78,16 @@ func start(c *cli.Context) {
 			LocalAgentHostPort: c.String("jaeger-host") + ":" + c.String("jaeger-port"),
 		},
 	}
-	tracer, closer, err := cfg.New(
-		"calculator",
+	tracer, closer, err := cfg.NewTracer(
 		config.Logger(jaegerLoggerAdapter{logger}),
 		config.Observer(rpcmetrics.NewObserver(metrics.Namespace(jaeger_metrics.NSOptions{Name: "calculator"}), rpcmetrics.DefaultNameNormalizer)),
 	)
 	if err != nil {
 		logger.Fatalf("Cannot initialize Jaeger Tracer %s", err)
 	}
-	defer closer.Close()
+	defer func() {
+		_ = closer.Close()
+	}()
 
 	// Set GRPC Interceptors
 	server := grpc.NewServer(
@@ -114,11 +115,13 @@ func start(c *cli.Context) {
 	go func() {
 		mux := http.NewServeMux()
 		mux.Handle("/metrics", promhttp.Handler())
-		http.ListenAndServe(c.String("bind-prometheus-http"), mux)
+		_ = http.ListenAndServe(c.String("bind-prometheus-http"), mux)
 	}()
 
 	log.Println("Starting Calculator service..")
-	go server.Serve(lis)
+	go func() {
+		_ = server.Serve(lis)
+	}()
 
 	conn, err := grpc.Dial(c.String("bind-grpc"), grpc.WithInsecure())
 	if err != nil {
@@ -130,7 +133,7 @@ func start(c *cli.Context) {
 	if err != nil {
 		panic("Cannot serve http api")
 	}
-	http.ListenAndServe(c.String("bind-http"), mux)
+	_ = http.ListenAndServe(c.String("bind-http"), mux)
 }
 
 type jaegerLoggerAdapter struct {

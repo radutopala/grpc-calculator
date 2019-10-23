@@ -25,13 +25,15 @@ func main() {
 
 func start(c *cli.Context) {
 	conn, err := grpc.Dial(c.String("grpc-address"), grpc.WithInsecure())
-	defer conn.Close()
+	defer func() {
+		_ = conn.Close()
+	}()
 	if err != nil {
 		panic("Couldn't contact grpc server")
 	}
 
 	client := calculator.NewServiceClient(conn)
-	response, err := client.Compute(context.Background(), &calculator.Request{Expression: c.Args()[0]})
+	response, _ := client.Compute(context.Background(), &calculator.Request{Expression: c.Args()[0]})
 
 	log.Printf("Result is: %v", response.Result)
 }
