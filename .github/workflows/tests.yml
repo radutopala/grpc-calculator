@@ -16,5 +16,5 @@ jobs:
         uses: actions/checkout@v1
       - name: Coverage
         run: make coverage
-      - name: Coverage
+      - name: Benchmark
         run: make benchmark
