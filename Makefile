@@ -6,7 +6,15 @@ generate:
 
 tests:
 	@echo "Running tests"
-	go test -bench=. -v ./...
+	@mkdir -p artifacts
+	go test -race -cover -coverprofile=artifacts/coverage.out -v ./...
+
+coverage: tests
+	@echo "Running coverage"
+	go tool cover -html=artifacts/coverage.out -o artifacts/coverage.html
+
+benchmark:
+	go test -v -bench=. ./...
 
 docker-build:
 	@echo "Build docker server image"
